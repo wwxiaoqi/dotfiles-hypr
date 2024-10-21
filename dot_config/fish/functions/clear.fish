@@ -1,0 +1,4 @@
+function clear
+    bunnyfetch
+end
+

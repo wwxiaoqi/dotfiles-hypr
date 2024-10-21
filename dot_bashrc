@@ -1,0 +1,85 @@
+# add interactive (as a login shell, not running script) configs in this file
+# environment virables should be exported in .profile or .bash_profile
+
+# Set the command line editing mode of the shell to vi mode
+set -o vi
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+# don't put consecutive identical lines or lines starting with space in the history.
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# auto cd when entering a path
+shopt -s autocd
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=5000
+HISTFILESIZE=10000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+shopt -s globstar
+
+# define the display format of the command line prompt (prompt).
+PS1='\[\033[31m\][\[\033[00m\]\u\[\033[31m\]@\[\033[00m\]\h \W\[\033[31m\]]\[\033[00m\]\$ '
+
+# enable color support of ls and also add handy aliases
+# dircolors -p > ~/.dircolors
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls -F --color=auto --group-directories-first'
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+# base install bash-completion.
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+# control the startup of the ranger program based on the state 
+# of the $RANGER_LEVEL environment variable
+ranger() {
+    if [ -z "$RANGER_LEVEL" ]; then
+        /usr/bin/ranger "$@"
+    else
+        exit
+    fi
+}
+
+alias rm="rm -I";
+alias cp="cp -i";
+alias mv="mv -i";
+alias vim="nvim";
+alias diff="diff --color=auto";
+alias grep="grep --color=auto";
+alias du="du -h";
+alias df="df -h -x tmpfs";
+alias free="free -h";
+alias less="less -F";
+alias hibernate="systemctl hibernate";
+alias mpv="mpv --loop";
+alias fv="fzf --preview 'cat {}' | xargs nvim";
+alias ll='ls -lh'
+alias la='ls -A'
+alias lla='ls -lhA'
+alias l.='ls -d .*'
+alias ll.='ls -lh -d .*'
+alias ..='cd ..'
+alias ...='cd ../..'

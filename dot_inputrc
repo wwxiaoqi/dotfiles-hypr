@@ -1,0 +1,37 @@
+# inputrc
+# See https://wiki.archlinux.org/title/Readline
+
+# If ~/.inputrc doesn't exist yet: First include the original /etc/inputrc
+# so it won't get overriden
+$include /etc/inputrc
+
+# enable case-insensitive tab completion
+set completion-ignore-case on
+
+# faster completion
+set show-all-if-unmodified on
+
+# set it only for Bash by adding 
+set editing-mode vi
+
+# vi mode indicator
+set show-mode-in-prompt on
+
+# cursor shapes for each mode
+set vi-ins-mode-string \1\e[6 q\2
+set vi-cmd-mode-string \1\e[2 q\2
+
+# colorized completion
+set colored-stats On
+
+# Append char to indicate type (dir/)
+set visible-stats On
+
+# Mark symlinked directories (symlink@)
+set mark-symlinked-directories On
+
+# Color the common prefix
+set colored-completion-prefix On
+
+# Color the common prefix in menu-complete
+set menu-complete-display-prefix On

@@ -1,0 +1,4 @@
+[".config/wallpapers"]
+    type = "git-repo"
+    url = "https://github.com/wwxiaoqi/MyWallpapers.git"
+    refreshPeriod = "168h"
