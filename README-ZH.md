@@ -6,6 +6,8 @@
 在全新设备上安装 chezmoi 后执行以下内容：
 
 ```shell
+sudo pacman -S chezmoi
+
 chezmoi init --apply https://github.com/wwxiaoqi/dotfiles-hypr
 ```
 
@@ -55,7 +57,7 @@ yay -S bluetuith
 ### 窗口管理器
 
 ```shell
-sudo pacman -S foot hypridle hyprland hyprlock mako waybar wev fish wmenu wtype wl-clipboard cliphist gammastep slurp grim gimp wf-recorder 
+sudo pacman -S foot hypridle hyprland hyprlock mako waybar wev fish wmenu wtype wl-clipboard cliphist gammastep slurp grim gimp wf-recorder wpaperd
 ```
 
 ```shell
@@ -71,7 +73,7 @@ sudo pacman -S adwaita-qt5 adwaita-qt6 qt5ct qt6ct lxappearance
 ### 字体
 
 ```shell
-sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-sarasa-gothic noto-fonts-extra otf-font-awesome ttf-dejavu ttf-font-awesome ttf-joypixels ttf-nerd-fonts-symbols ttf-sarasa-gothic
+sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-sarasa-gothic noto-fonts-extra otf-font-awesome ttf-dejavu ttf-font-awesome ttf-joypixels ttf-nerd-fonts-symbols ttf-sarasa-gothic wqy-microhei
 ```
 
 ### 文件浏览

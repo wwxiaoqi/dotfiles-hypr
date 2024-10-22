@@ -6,6 +6,8 @@ This repository uses chezmoi as the dotfiles management tool. For specific infor
 After installing chezmoi on a brand new device, execute the following:
 
 ```shell
+sudo pacman -S chezmoi
+
 chezmoi init --apply https://github.com/wwxiaoqi/dotfiles-hypr
 ```
 
@@ -55,7 +57,7 @@ yay -S bluetuith
 ### Window Manager
 
 ```shell
-sudo pacman -S foot hypridle hyprland hyprlock mako waybar wev fish wmenu wtype wl-clipboard cliphist gammastep slurp grim gimp wf-recorder 
+sudo pacman -S foot hypridle hyprland hyprlock mako waybar wev fish wmenu wtype wl-clipboard cliphist gammastep slurp grim gimp wf-recorder wpaperd
 ```
 
 ```shell
@@ -71,7 +73,7 @@ sudo pacman -S adwaita-qt5 adwaita-qt6 qt5ct qt6ct lxappearance
 ### Fonts
 
 ```shell
-sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-sarasa-gothic noto-fonts-extra otf-font-awesome ttf-dejavu ttf-font-awesome ttf-joypixels ttf-nerd-fonts-symbols ttf-sarasa-gothic
+sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-sarasa-gothic noto-fonts-extra otf-font-awesome ttf-dejavu ttf-font-awesome ttf-joypixels ttf-nerd-fonts-symbols ttf-sarasa-gothic wqy-microhei
 ```
 
 ### File browsing

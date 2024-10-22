@@ -70,11 +70,7 @@ mako
 man-db
 mediainfo
 mokutil
-mpc
-mpd
-mpv
 ncdu
-ncmpcpp
 neomutt
 neovim
 networkmanager
@@ -101,6 +97,7 @@ pipewire-alsa
 pipewire-jack
 pipewire-pulse
 qt5ct
+qt6ct
 ranger-git
 rime-ice-git
 ripgrep
@@ -139,7 +136,6 @@ wf-recorder
 wget
 wl-clipboard
 wlroots
-wlsunset
 wmenu
 wpaperd
 wqy-microhei
