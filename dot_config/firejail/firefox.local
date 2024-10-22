@@ -1,0 +1,14 @@
+ignore disable-mnt
+include blacklist-gpg.local
+
+whitelist ${HOME}/dls
+whitelist ${HOME}/tmp
+
+whitelist ${HOME}/doc/httrack
+read-only ${HOME}/doc/httrack
+
+whitelist ${HOME}/repo/extensions/firefox
+read-only ${HOME}/repo/extensions/firefox
+
+whitelist ${HOME}/doc/arch-wiki
+read-only ${HOME}/doc/arch-wiki

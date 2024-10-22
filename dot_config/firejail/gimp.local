@@ -1,0 +1,7 @@
+include whitelist-common.local
+include whitelist-player-pic.local
+include blacklist-gpg.local
+
+whitelist ${HOME}/doc/gimp
+
+net none

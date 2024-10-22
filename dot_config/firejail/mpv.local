@@ -1,0 +1,18 @@
+ignore disable-mnt
+include whitelist-common.local
+include whitelist-player-mus.local
+include whitelist-player-pic.local
+include whitelist-player-vid.local
+
+
+# allow video files in home
+whitelist ${HOME}/*.mkv
+whitelist ${HOME}/*.mp4
+whitelist ${HOME}/*.webm
+whitelist ${HOME}/*.gif
+whitelist ${HOME}/*.mp3
+
+whitelist ${HOME}/smb
+whitelist ${HOME}/mnt
+
+net none

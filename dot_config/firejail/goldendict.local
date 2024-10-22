@@ -1,0 +1,3 @@
+include whitelist-common.local
+
+whitelist ${HOME}/doc/dicts

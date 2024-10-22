@@ -1,0 +1,12 @@
+include whitelist-common.local
+ignore disable-mnt
+include mpv.local
+
+# allow access to ranger cache
+whitelist ${HOME}/.cache/ranger
+
+whitelist ${HOME}/mus
+whitelist ${HOME}/vid
+whitelist ${HOME}/pic
+
+net none
