@@ -47,6 +47,7 @@ google-chrome
 grim
 grub
 grub-btrfs
+httrack
 hypridle
 hyprland
 hyprlock
@@ -64,12 +65,12 @@ linux-headers
 linux-lts
 linux-lts-headers
 linuxqq
-localsend-bin
 lxappearance
 mako
 man-db
 mediainfo
 mokutil
+mpv
 ncdu
 neomutt
 neovim
@@ -144,6 +145,8 @@ xclip
 xdg-desktop-portal
 xdg-desktop-portal-hyprland
 xf86-video-vesa
+xorg-xrdb
+xsettingsd
 yay
 zathura
 zathura-pdf-mupdf
