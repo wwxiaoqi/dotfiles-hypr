@@ -81,7 +81,8 @@
         "rewrite": {
             "(.*) — Mozilla Firefox": "Firefox",
             "(.*) - Google Chrome": "Chrome",
-			"(.*) - Code - OSS": "VS Code"
+			"(.*) - Code - OSS": "VS Code",
+			"(.*) — 1Password": "1Password"
         },
         "separate-outputs": true
 	},
