@@ -116,6 +116,7 @@ tooltip {
 #network,
 #idle_inhibitor,
 #custom-period,
+#custom-battery,
 #battery {
   background: rgba(26, 27, 38, 0);
   padding: 0 10px;

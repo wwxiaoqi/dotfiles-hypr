@@ -29,7 +29,7 @@
 		"custom/dividing_line",
 		"cpu",
 		"custom/dividing_line",
-		"battery",
+		"custom/battery",
 		"custom/dividing_line",
 		"clock",
 		"custom/dividing_line",
@@ -112,18 +112,6 @@
 		"persistent-workspaces": {
 			"*": 6
 		}
-	},
-	"custom/media": {
-		"format": "{icon} {}",
-		"escape": true,
-		"return-type": "json",
-		"max-length": 40,
-		"on-click": "playerctl play-pause",
-		"on-click-right": "playerctl stop",
-		"smooth-scrolling-threshold": 10,
-		"on-scroll-up": "playerctl next",
-		"on-scroll-down": "playerctl previous",
-		"exec": "/home/vavakado/.config/waybar/mediaplayer.py 2> /dev/null"
 	},
 	"custom/workspace-begin": {
 		"format": "[",
@@ -213,5 +201,12 @@
 	"custom/period": {
         "format": "",
 		"tooltip": false
+    },
+	"custom/battery": {
+        "exec": "$HOME/.config/waybar/scripts/battery_info.sh 2> /dev/null",
+        "format": "{}",
+        "tooltip": true,
+		"return-type": "json",
+        "interval": 1
     }
 }
