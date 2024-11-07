@@ -1,3 +1,6 @@
-include whitelist-common.local
+whitelist ${HOME}/tmp
 
 whitelist ${HOME}/doc/dicts
+whitelist ${HOME}/doc/dicts/*
+whitelist ${HOME}/doc/dicts/ecdict-mdx-style-28/
+whitelist ${HOME}/doc/dicts/汉英词典/
