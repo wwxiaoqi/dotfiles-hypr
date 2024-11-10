@@ -1,0 +1,1 @@
+ln -s /usr/bin/firejail /usr/local/bin/[bin_name]
