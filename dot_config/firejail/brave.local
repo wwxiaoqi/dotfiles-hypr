@@ -1,0 +1,5 @@
+ignore disable-mnt
+include blacklist-gpg.local
+
+whitelist ${HOME}/dls
+whitelist ${HOME}/tmp
