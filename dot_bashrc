@@ -66,6 +66,9 @@ ranger() {
     fi
 }
 
+# start zoxide
+eval "$(zoxide init bash)"
+
 alias rm="rm -I";
 alias cp="cp -i";
 alias mv="mv -i";
