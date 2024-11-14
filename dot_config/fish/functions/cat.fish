@@ -1,3 +1,3 @@
 function cat
-    bat --paging never --theme DrrkNeon --style plain $argv
+    bat --paging never --theme DarkNeon --style plain $argv
 end

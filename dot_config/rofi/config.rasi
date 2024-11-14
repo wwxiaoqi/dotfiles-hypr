@@ -1,0 +1,10 @@
+* {
+    font: "JetBrainsMono Nerd Font 16";
+}
+
+window {
+    background-color: @background;
+    border: 1px solid;
+    width:          1200;
+    height:         500;
+}
