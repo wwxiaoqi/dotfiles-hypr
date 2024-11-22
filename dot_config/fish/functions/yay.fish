@@ -1,3 +1,3 @@
 function yay
-    yay $argv
+    paru $argv
 end
