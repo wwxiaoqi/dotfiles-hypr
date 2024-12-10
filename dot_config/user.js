@@ -69,5 +69,9 @@ user_pref("extensions.webextensions.ExtensionStorageIDB.migrated.screenshots@moz
 user_pref("extensions.webextensions.ExtensionStorageIDB.migrated.tridactyl.vim@cmcaine.co.uk", true);
 user_pref("extensions.webextensions.ExtensionStorageIDB.migrated.uBlock0@raymondhill.net", true);
 
-// proxy
-user_pref("network.proxy.share_proxy_settings", true);
+// search engine
+user_pref("browser.urlbar.placeholderName", "Bing");
+user_pref("browser.urlbar.placeholderName.private", "Bing");
+
+// color theme
+user_pref("extensions.activeThemeID", "default-theme@mozilla.org");

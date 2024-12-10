@@ -1,5 +1,0 @@
-include whitelist-common.local
-include blacklist-gpg.local
-include whitelist-player-vid.local
-
-noblacklist ${HOME}/vid

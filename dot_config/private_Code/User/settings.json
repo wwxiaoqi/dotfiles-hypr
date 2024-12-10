@@ -6,14 +6,9 @@
     "keyboard.dispatch": "keyCode",
     // always turn on word wrap
     "editor.wordWrap": "on",
-    "editor.fontSize": 16,
+    "editor.fontSize": 15,
     "vim.neovimConfigPath": "~/.config/nvim/init.vim",
     "vim.neovimPath": "/usr/bin/nvim",
-    "vim.neovimUseConfigFile": true,
-    "explorer.confirmDelete": false,
-    "window.confirmSaveUntitledWorkspace": false,
-    "workbench.startupEditor": "none",
-    "C_Cpp_Runner.cCompilerPath": "clang",
-    "C_Cpp_Runner.cppCompilerPath": "clang++",
-    "clangd.path": "/home/xiaoqi/.config/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/18.1.3/clangd_18.1.3/bin/clangd"
-} 
+    "vim.neovimUseConfigFile": true
+
+}

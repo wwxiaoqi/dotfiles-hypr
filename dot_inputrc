@@ -18,8 +18,13 @@ set editing-mode vi
 set show-mode-in-prompt on
 
 # cursor shapes for each mode
-set vi-ins-mode-string \1\e[6 q\2
-set vi-cmd-mode-string \1\e[2 q\2
+$if term=linux
+	set vi-ins-mode-string \1\e[?0c\2
+	set vi-cmd-mode-string \1\e[?8c\2
+$else
+	set vi-ins-mode-string \1\e[6 q\2
+	set vi-cmd-mode-string \1\e[2 q\2
+$endif
 
 # colorized completion
 set colored-stats On
@@ -35,3 +40,6 @@ set colored-completion-prefix On
 
 # Color the common prefix in menu-complete
 set menu-complete-display-prefix On
+
+# disabling C-c to echo (^C)
+set echo-control-characters off

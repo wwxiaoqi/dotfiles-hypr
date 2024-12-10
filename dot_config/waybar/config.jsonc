@@ -203,7 +203,7 @@
 		"tooltip": false
     },
 	"custom/battery": {
-        "exec": "$HOME/.config/waybar/scripts/battery_info.sh 2> /dev/null",
+        "exec": "bash $HOME/.config/waybar/scripts/battery-info.sh 2> /dev/null",
         "format": "{}",
         "tooltip": true,
 		"return-type": "json",

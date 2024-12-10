@@ -1,27 +1,50 @@
 # add interactive (as a login shell, not running script) configs in this file
 # environment virables should be exported in .profile or .bash_profile
 
-# Set the command line editing mode of the shell to vi mode
-set -o vi
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
 esac
 
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+# base install bash-completion.
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+# source aliases
+if [ -f "$HOME/.bash_aliases" ]; then
+    . "$HOME/.bash_aliases"
+fi
+
+# Set the command line editing mode of the shell to vi mode
+set -o vi
+
+# fzf keybindings
+eval "$(fzf --bash)"
+
+# start zoxide
+eval "$(zoxide init bash)"
+
 # don't put consecutive identical lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=20000
+HISTFILESIZE=40000
 
 # append to the history file, don't overwrite it
 shopt -s histappend
 
 # auto cd when entering a path
 shopt -s autocd
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=5000
-HISTFILESIZE=10000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -37,25 +60,6 @@ PS1='\[\033[31m\][\[\033[00m\]\u\[\033[31m\]@\[\033[00m\]\h \W\[\033[31m\]]\[\03
 ### Environment configuration
 export TERM=xterm-256color
 
-# enable color support of ls and also add handy aliases
-# dircolors -p > ~/.dircolors
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls -F --color=auto --group-directories-first'
-fi
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-# base install bash-completion.
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
-
 # control the startup of the ranger program based on the state 
 # of the $RANGER_LEVEL environment variable
 ranger() {
@@ -66,26 +70,3 @@ ranger() {
     fi
 }
 
-# start zoxide
-eval "$(zoxide init bash)"
-
-alias rm="rm -I";
-alias cp="cp -i";
-alias mv="mv -i";
-alias vim="nvim";
-alias diff="diff --color=auto";
-alias grep="grep --color=auto";
-alias du="du -h";
-alias df="df -h -x tmpfs";
-alias free="free -h";
-alias less="less -F";
-alias hibernate="systemctl hibernate";
-alias mpv="mpv --loop";
-alias fv="fzf --preview 'cat {}' | xargs nvim";
-alias ll='ls -lh'
-alias la='ls -A'
-alias lla='ls -lhA'
-alias l.='ls -d .*'
-alias ll.='ls -lh -d .*'
-alias ..='cd ..'
-alias ...='cd ../..'
