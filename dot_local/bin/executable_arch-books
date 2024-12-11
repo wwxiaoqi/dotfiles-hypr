@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# 定义搜索路径数组
+search_paths=(
+    "$HOME/pub/"
+)
+
+# 定义指定搜索格式
+file_extensions=(
+    "epub"
+    "pdf"
+)
+
+# 使用 printf 构建 pattern
+inclusion_pattern=$(printf -- '-e .%s$ ' "${file_extensions[@]}")
+
+echo "$inclusion_pattern"
+
+# 在搜索路径中查找文件，且对结果进行排序
+selected_file=$(find "${search_paths[@]}" -type f | grep $inclusion_pattern | wmenu -p "wbook" -i -l 6 -f "SourceCodePro Medium 14" -i -N 242424 -n eeeeee -S 249988 -s 000000)
+
+# Check if a file was selected and open it with Zathura
+if [ -n "$selected_file" ]; then
+    zathura "$selected_file"
+fi

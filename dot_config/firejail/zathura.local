@@ -1,13 +1,6 @@
 include whitelist-common.local
 
-blacklist ${HOME}/mus/.gpg
-blacklist ${HOME}/pic/.gpg
-blacklist ${HOME}/vid/.gpg
-
-whitelist ${HOME}/doc/books
-read-only ${HOME}/doc/books
-
-whitelist ${HOME}/doc/.gpg
-read-only ${HOME}/doc/.gpg
+whitelist ${HOME}/pub
+read-only ${HOME}/pub
 
 net none

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# 定义搜索路径数组
+search_paths=(
+    "$HOME/.local/share/chezmoi/"
+)
+
+# 排除路径数组
+exclusions=(
+
+)
+
+# 使用 printf 构建排除模式
+exclusion_pattern=$(printf -- '-ve \"%s\" ' "${exclusions[@]}")
+
+# 在搜索路径中查找文件，且对结果进行排序
+selected_file=$(find "${search_paths[@]}" -type f | grep $exclusion_pattern | sort | wmenu -p "Chezmoi: " -i -l 6 -f "SourceCodePro Medium 14" -i -N 242424 -n eeeeee -S 249988 -s 000000)
+
+# 检查 wmenu 是否选择了文件
+if [ -n "$selected_file" ]; then
+    foot nvim "$selected_file"
+fi
