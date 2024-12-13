@@ -1,0 +1,68 @@
+#!/bin/bash
+
+GITHUB_URL="https://github.com/Loyalsoldier/v2ray-rules-dat"
+GEOIP_URL="${GITHUB_URL}/releases/latest/download/geoip.dat"
+GEOSITE_URL="${GITHUB_URL}/releases/latest/download/geosite.dat"
+
+LOCAL_GEOIP_PATH="/usr/share/v2ray/geoip.dat"
+LOCAL_GEOSITE_PATH="/usr/share/v2ray/geosite.dat"
+
+TEMP_DIR=$(mktemp -d)
+DATE_FORMAT="+%Y-%m-%d %H:%M:%S"
+
+
+# Function to update a file
+update_geo_file() {
+    local url="$1"
+    local local_path="$2"
+    local temp_path="${TEMP_DIR}/$(basename "$local_path")"
+
+    echo "$(date "$DATE_FORMAT"): 开始下载 $(basename "$local_path") 到临时目录..."
+    
+    if curl -fsSL -o "$temp_path" "$url"; then
+        echo "$(date "$DATE_FORMAT"): $(basename "$local_path") 下载成功。"
+    else
+        echo "$(date "$DATE_FORMAT"): $(basename "$local_path") 下载失败。"
+        return 1
+    fi
+}
+
+# Function to move file with sudo
+move_file_with_sudo() {
+    local temp_path="$1"
+    local local_path="$2"
+
+    if sudo mv "$temp_path" "$local_path"; then
+        echo "$(date "$DATE_FORMAT"): $(basename "$local_path") 移动成功。"
+    else
+        echo "$(date "$DATE_FORMAT"): $(basename "$local_path") 移动失败。"
+        return 1
+    fi
+}
+
+# Trap to ensure cleanup on exit
+trap 'rm -rf "$TEMP_DIR"; exit' INT TERM EXIT
+
+# Perform updates
+if update_geo_file "$GEOIP_URL" "$LOCAL_GEOIP_PATH" && update_geo_file "$GEOSITE_URL" "$LOCAL_GEOSITE_PATH"; then
+    # Prompt for sudo password
+    echo "$(date "$DATE_FORMAT"): 请输入您的密码："
+    if sudo -v; then
+        # Move files to final location
+        if move_file_with_sudo "${TEMP_DIR}/geoip.dat" "$LOCAL_GEOIP_PATH" && move_file_with_sudo "${TEMP_DIR}/geosite.dat" "$LOCAL_GEOSITE_PATH"; then
+            echo "$(date "$DATE_FORMAT"): 更新成功！"
+        else
+            exit 1
+        fi
+    else
+        echo "$(date "$DATE_FORMAT"): 密码验证失败。"
+        exit 1
+    fi
+else
+    echo "$(date "$DATE_FORMAT"): 由于下载失败，脚本将退出。"
+    exit 1
+fi
+
+# Remove trap after successful execution
+trap - INT TERM EXIT
+rm -rf "$TEMP_DIR"
