@@ -1,0 +1,6 @@
+#!/bin/bash
+selected_text=$(cliphist list | wmenu -l 9 -f "SourceCodePro Medium 14" -i -N 242424 -n eeeeee -S 249988 -s 000000 | cliphist decode)
+
+if [ -n "$selected_text" ]; then
+  echo -n "$selected_text" | wl-copy
+fi
