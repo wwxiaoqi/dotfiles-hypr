@@ -57,7 +57,7 @@ yay -S bluetuith
 ### 窗口管理器
 
 ```shell
-sudo pacman -S foot hypridle hyprland hyprlock mako waybar wev fish wmenu wtype wl-clipboard cliphist gammastep slurp grim gimp wf-recorder wpaperd
+sudo pacman -S alacritty foot hypridle hyprland hyprlock mako waybar wev fish wmenu wtype wl-clipboard cliphist gammastep slurp grim gimp wf-recorder wpaperd
 ```
 
 ```shell

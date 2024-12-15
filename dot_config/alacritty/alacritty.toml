@@ -1,0 +1,15 @@
+[font]
+size = 19
+
+[selection]
+save_to_clipboard = true
+
+[terminal.shell]
+args = ["-l", "-c", "tmux attach || tmux"]
+program = "/bin/fish"
+
+[window]
+dynamic_title = true
+opacity = 0.9
+
+[terminal]
