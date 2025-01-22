@@ -1,0 +1,130 @@
+# 默认模型 (gpt-3.5-turbo, gpt-4, ggml-gpt4all-j...).
+default-model: deepseek-chat
+
+# 使用 -f flag 时附加的提示词.
+format-text:
+  markdown: 'Format the response as markdown without enclosing backticks.'
+  json: 'Format the response as json without enclosing backticks.'
+
+# 基于角色预定义消息列表
+roles:
+  "default": []
+
+  # shell 专家
+  #  - 你是一个 shell 专家
+  #  - 你不解释任何事情
+  #  - 你只输出单行命令来解决你被问到的问题
+  #  - 你不提供任何解释，只输出命令
+  shell:
+    - you are a shell expert
+    - you do not explain anything
+    - you simply output one liners to solve the problems you're asked
+    - you do not provide any explanation whatsoever, ONLY the command
+
+  # 翻译专家
+  translator:
+    - you are a translation expert
+    - when the input is in Chinese,you translate it to English
+    - when the input is in English,you translate it to Chinese
+    - you do not provide any explanation or additional comments,ONLY the translation
+
+  # 解释与总结专家
+  explainer:
+    - you are an explanation and summarization expert
+    - you read the input carefully
+    - you explain the content in detail and provide a concise summary
+    - you ensure the explanation is clear and easy to understand
+
+  # 编程助手
+  coder:
+    - you are a coding assistant
+    - you provide solutions to programming problems
+    - your responses are clear and include well-commented code examples
+    - you explain the logic behind the provided code in simple terms
+
+  # 数据分析专家
+  data_analyst:
+    - you are a data analysis expert
+    - you provide insights and solutions to data-related problems
+    - you can write SQL queries,Python code for data analysis, or suggest visualization techniques
+    - you explain your approach clearly and concisely
+
+  # 文案撰写专家
+  copywriter:
+    - you are a professional copywriter
+    - you create engaging and persuasive text based on the input
+    - you adapt your tone and style to suit the target audience
+    - you do not include unnecessary explanations,just the requested text
+
+  # 学术研究助手
+  researcher:
+    - you are an academic research assistant
+    - you help with finding,summarizing, and analyzing scholarly information
+    - you provide well-structured and evidence-based responses
+    - you cite credible sources when applicable
+
+# 默认格式化为 markdown
+format: false
+
+# 默认使用的系统角色
+role: "default"
+
+# 连接到 TTY 时以原始文本呈现输出
+raw: false
+
+# 静默模式（隐藏加载和成功的 stderr 消息）
+quiet: false
+
+# 结果发散 Temperature（随机性），范围从 0.0 到 2.0。
+temp: 1.0
+
+# Temperature 替代方案，用于缩小响应范围，范围从 0.0 到 1.0。
+topp: 1.0
+
+# 每个后续标记的前 K 个选项中采样
+topk: 50
+
+# 关闭模型输入的客户端大小限制
+no-limit: false
+
+# 在特定宽度下换行格式化输出（默认是 80）
+word-wrap: 80
+
+# 在响应中包含来自参数的提示
+include-prompt-args: false
+
+# 包含来自参数和标准输入的提示，然后截断标准输入为指定行数
+include-prompt: 0
+
+# 最大重试 API 调用次数
+max-retries: 5
+
+# Your desired level of fanciness.
+fanciness: 10
+
+# 生成时显示的文本
+status-text: Generating
+
+# 终端中使用的主题
+# 可选: 'charm', 'catppuccin', 'dracula', and 'base16'
+theme: charm
+
+# 模型输入的默认字符限制
+max-input-chars: 12250
+
+# 响应中的最大 tokens 数
+# max-tokens: 100
+
+# OpenAI 兼容 REST API 配置
+apis:
+  deepseek:
+    base-url: https://api.deepseek.com/
+    api-key:
+    api-key-env: DEEPSEEK_API_KEY
+    models:
+      deepseek-chat:
+        aliases: ["chat"]
+        max-input-chars: 384000
+      deepseek-reasoner:
+        aliases: ["r1"]
+        max-input-chars: 384000

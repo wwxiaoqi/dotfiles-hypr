@@ -125,7 +125,7 @@ patch:
 ### Tools
 
 ```shell
-sudo pacman -S neomutt newsboat
+sudo pacman -S neomutt newsboat mods
 ```
 
 ### Code
