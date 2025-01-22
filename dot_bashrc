@@ -70,3 +70,5 @@ ranger() {
     fi
 }
 
+# 創建一個 envsubst 可以直接讀取的不帶任何註釋、空行或空格（bash）
+export $(envsubst < .env)

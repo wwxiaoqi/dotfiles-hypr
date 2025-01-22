@@ -102,15 +102,15 @@
 			"1": "Main",
 			"2": "Web",
 			"3": "Docs",
-			"4": "Tools",
-			"5": "Media",
-			"6": "Chat",
-			"7": "tmp",
-			"8": "tmp",
-			"9": "tmp"
+			"4": "Misc",
+			"5": "Tools",
+			"6": "Media",
+			"7": "Chat",
+			"8": "Temp1",
+			"9": "Temp2"
 		},
 		"persistent-workspaces": {
-			"*": 6
+			"*": 7
 		}
 	},
 	"custom/workspace-begin": {
