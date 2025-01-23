@@ -1,33 +1,54 @@
+#
+# ~/.bash_aliases
+#
 
+# Color and directory listing
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls -F --color=auto --group-directories-first'
 fi
 
+# File operations
 alias rm="rm -I";
 alias cp="cp -i";
 alias mv="mv -i";
+
+# Colorful commands
 alias diff="diff --color=auto"
 alias grep="grep --color=auto"
+
+# Directory listing shortcuts
 alias ll='ls -lh'
 alias la='ls -A'
 alias lla='ls -lhA'
 alias l.='ls -d .*'
 alias ll.='ls -lh -d .*'
-alias bat="bat --style='plain,changes,rule,snip'"
+
+# Disk usage
 alias du="du -h -d 1"
 alias dU="du -h -d 1 | sort -rh"
 alias df="df -h -x tmpfs -x efivarfs -x devtmpfs"
+
+# System information
 alias lsblk="lsblk -o name,mountpoints,type,size"
 alias free="free -h"
-alias less="less -F"
 alias iostat="iostat -t 2"
+
+# Git and fzf
 alias fgl="git log | grep '^commit ' | cut -d' ' -f2 | fzf --preview 'git show {} | bat --color=always --style=plain,changes ' --preview-window=90% | wl-copy"
-alias .s='. ~/.profile && . ~/.bashrc && . ~/.bash_aliases'
+
+# Navigation
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ?='pwd'
+
+# System control
 alias hibernate="systemctl hibernate"
 alias poweroff="systemctl poweroff"
 alias reboot="systemctl reboot"
+
+# Editor
 alias vim="nvim"
+
+# Bat with custom style
+alias bat="bat --style='plain,changes,rule,snip'"

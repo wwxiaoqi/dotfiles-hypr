@@ -1,24 +1,58 @@
 function ai
     # 初始化空的 args 数组
     set args
+    # 用于跳过已经处理的参数
+    set skip_next 0
 
-    # 遍历所有参数，处理特殊情况
-    for arg in $argv
-        # 支持 --format=json 的形式，将其拆分为 --format 和值
-        if string match -r -- '^--format=.*' $arg > /dev/null
-            set format_value (string replace --regex '^--format=' '' -- $arg)  # 提取等号后的值
-            set args $args "--format" $format_value
-        else if string match -r -- '^-R.+' $arg > /dev/null
-            # 如果参数是 -R 开头的形式，拆分为 --role 和值
-            set role_value (string sub -s 3 -- $arg)  # 提取 -R 后的值
+    # 遍历所有参数
+    for i in (seq (count $argv))
+        if test $skip_next -eq 1
+            set skip_next 0
+            continue
+        end
+
+        set arg $argv[$i]
+
+        # 支持 --role=shell 的形式，将其拆分为 --role 和值
+        if string match -r -- '^--role=.*' $arg > /dev/null
+            set role_value (string replace --regex '^--role=' '' -- $arg)
             set args $args "--role" $role_value
+
+        # 支持 --role shell 的形式
+        else if string match -r -- '^--role$' $arg > /dev/null
+            if test (count $argv) -ge (math $i + 1)
+                set role_value $argv[(math $i + 1)]
+                set args $args "--role" $role_value
+                set skip_next 1  # 跳过下一个参数
+            else
+                echo "Error: --role requires a value." >&2
+                return 1
+            end
+
+        # 支持 -R 和 -Rshell 的形式
+        else if string match -r -- '^-R$' $arg > /dev/null
+            # 如果参数是单独的 -R，取下一个参数作为 role 值
+            if test (count $argv) -ge (math $i + 1)
+                set role_value $argv[(math $i + 1)]
+                set args $args "--role" $role_value
+                set skip_next 1  # 跳过下一个参数
+            else
+                echo "Error: -R requires a value." >&2
+                return 1
+            end
+        else if string match -r -- '^-R.+' $arg > /dev/null
+            # 如果参数是 -R 开头并直接跟值的形式
+            set role_value (string sub -s 3 -- $arg)
+            set args $args "--role" $role_value
+
+        # 支持其他参数
         else
             set args $args $arg
         end
     end
 
     # 检查是否包含 --delete-all 参数
-    if contains -- "--delete-all" $args
+    if string match -q -- "--delete-all" $args
         set ids (mods --list | awk '{print $1}')
         set count (echo $ids | wc -w)
 

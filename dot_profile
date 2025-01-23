@@ -1,19 +1,18 @@
-# ~/.profile: executed by the command interpreter for login shells.
-# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login exists.
-# environment virables should be exported in .profile or .bash_profile
-# alias should be in .bashrc
+#
+# ~/.profile
+#
 
-# default file permission
+# Default file permissions
 umask 022
 
-### if running bash include .bashrc if it exists
+# Source .bashrc if it exists
 if [ -n "$BASH_VERSION" ]; then
     if [ -f "$HOME/.bashrc" ]; then
 	. "$HOME/.bashrc"
     fi
 fi
 
-### set PATH so it includes user's private bin if it exists
+# Add user's private bin to PATH
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
@@ -22,54 +21,31 @@ if [ -d "$HOME/.local/sbin" ] ; then
     PATH="$HOME/.local/sbin:$PATH"
 fi
 
-# colorful manpage with bat
+# Colorful manpages with bat
 if [ -x /usr/bin/bat ]; then
     export MANROFFOPT="-c"
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 fi
 
-### Locale
-# The locale set for this variable will always override LANG 
-# and all the other LC_* variables, whether they are set or not. 
-# it is meant to be used only for testing or troubleshooting purposes. 
+# Locale settings
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-### TERM configuration
-export TERM=xterm-256color
-
-# EDITOR set to nvim.
-# See https://wiki.archlinux.org/title/Environment_variables
+# Editor
 export EDITOR=/bin/nvim;
 
-### Clean up home
-
-# user-specific config files.
+# XDG directories
 export XDG_CONFIG_HOME="$HOME/.config"
-
-# user-specific non-essential (cached) data.
 export XDG_CACHE_HOME="$HOME/.cache"
-
-# user-specific data files.
 export XDG_DATA_HOME="$HOME/.local/share"
 
-# calc
-# See https://www.mankier.com/1/calc
-export CALCHISTFILE="$XDG_CACHE_HOME/calc_history"
-
-# CUDA
-# Change the location of the CUDA cache.
-# See https://learn.foundry.com/nuke/13.1/content/comp_environment/configuring_nuke/nuke_environment_variables.html
-# default are: ~/.nv/NukeComputeCache
+# CUDA cache
 export CUDA_CACHE_PATH="$XDG_HOME_HOME/nv"
 
-# Change the GTK 2 theme
-# See https://wiki.archlinux.org/title/GTK
+# GTK 2 theme
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 
 # XDG user directories
-# eval echo \${XDG_${1}_DIR:-$HOME}
-# cat /etc/xdg/user-dirs.defaults
 export XDG_DESKTOP_DIR="$HOME/dek"
 export XDG_DOWNLOAD_DIR="$HOME/dls"
 export XDG_DOCUMENTS_DIR="$HOME/doc"
@@ -79,22 +55,19 @@ export XDG_VIDEOS_DIR="$HOME/vid"
 export XDG_TEMPLATES_DIR="$HOME/tmp"
 export XDG_PUBLICSHARE_DIR="$HOME/pub"
 
-# Other softwares
+# Other software configurations
 export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export GOPATH="$XDG_DATA_HOME/go"
 export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
 
-# Grim
-# See https://man.archlinux.org/man/grim.1.en
+# Grim screenshot directory
 export GRIM_DDEFAULT_DIR="$XDG_PICTURES_DIR/screenshots"
 
-# QT platform theme
+# QT and GTK themes
 export QT_QPA_PLATFORMTHEME=qt5ct
 export QT_STYLE_OVERRIDE=adwaita-dark
-
-# GTK theme
 export GTK_THEME=Adwaita-dark
 
 # Electron on wayland
@@ -103,15 +76,10 @@ export ELECTRON_OZONE_PLATFORM_HINT=wayland
 # External monitor cursor on nvidia
 export WLR_NO_HARDWARE_CURSORS=1
 
-# Fcitx
+# Fcitx input method
 export GTK_IM_MODULE=wayland
 export QT_IM_MODULE="wayland;fcitx;ibus"
 export XMODIFIERS=@im=fcitx
-
-# Ibus
-# export GTK_IM_MODULE=ibus
-# export XMODIFIERS=@im=ibus
-# export QT_IM_MODULE=ibus
 
 # Firefox
 export MOZ_DISABLE_RDD_SANDBOX=1

@@ -35,7 +35,6 @@ function fish_right_prompt
             echo -n -s " "
         end
 
-
         set root_folder (command git rev-parse --show-toplevel 2> /dev/null)
         set parent_root_folder (dirname $root_folder)
         set cwd (echo $PWD | sed -e "s|$parent_root_folder/||")
@@ -59,4 +58,3 @@ function fish_right_prompt
     end
     set_color normal
 end
-

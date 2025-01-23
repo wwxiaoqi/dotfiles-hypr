@@ -1,9 +1,11 @@
 #
 # ~/.bash_profile
 #
+
+# Source .bashrc if it exists
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-# Start Hyprland
+# Start Hyprland on tty1
 if [[ -z $DISPLAY ]] && [[ $(tty) = '/dev/tty1' ]]; then
 	exec Hyprland 
 fi
