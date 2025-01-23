@@ -1,6 +1,6 @@
-[".config/wallpapers"]
+["pic/wallpapers"]
     type = "archive"
-    url = "https://github.com/wwxiaoqi/MyWallpapers/archive/refs/tags/v1.tar.gz"
+    url = "https://github.com/wwxiaoqi/MyWallpapers/archive/refs/tags/v2.tar.gz"
     exact = true
     stripComponents = 1
     refreshPeriod = "672h"
