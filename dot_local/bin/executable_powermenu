@@ -1,0 +1,33 @@
+#!/bin/sh
+# 功能：显示一个简单的系统电源菜单，允许用户选择关机、重启、挂起等操作。
+
+# 获取系统运行时间
+uptime=$(uptime -p | sed 's/up //g')
+
+# 定义菜单选项
+menu_options="Power Off
+Restart
+Suspend
+Hibernate
+Log Out
+Lock
+
+Uptime: $uptime
+"
+
+# 显示菜单并获取用户选择
+user_choice=$(printf "%s" "$menu_options" | rofi -dmenu -i -no-show-icons -l 7 -width 30 -p " Goodbye ${USER}")
+
+# 如果用户没有选择任何选项，则退出脚本
+[ -z "$user_choice" ] && exit
+
+# 根据用户选择执行对应操作
+case "$user_choice" in
+  *"Power Off"*) poweroff ;;                       # 关机
+  *"Restart"*) reboot ;;                           # 重启
+  *"Suspend"*) systemctl suspend-then-hibernate ;; # 挂起到休眠
+  *"Hibernate"*) systemctl hibernate ;;            # 休眠
+  *"Log Out"*) killhypr ;;                         # 注销
+  *"Lock"*) hyprlock -l ;;                         # 锁定屏幕
+  *) ;;
+esac

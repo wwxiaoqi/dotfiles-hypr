@@ -1,0 +1,101 @@
+#!/usr/bin/env bash
+
+# 检查是否需要扫描网络
+scan_option="󰍉  Scan for Networks"
+
+# 检查 Wi-Fi 是否已启用
+wifi_status=$(iwctl device list | grep wlan0 | awk '{print $3}')
+if [[ "$wifi_status" == "connected" ]]; then
+    toggle="󰖪  Disable Wi-Fi"
+else
+    toggle="󰖩  Enable Wi-Fi"
+fi
+
+# 获取已保存的 Wi-Fi 列表
+saved_wifi_list=$(iwctl known-networks list | sed '1,4d' | awk '
+{
+    # 删除 ANSI 转义序列
+    gsub(/\x1b\[[0-9;]*m/, "");
+
+    # 提取 Wi-Fi 名称，直到遇到 Security 类型字段（psk 或 open）
+    name = "";
+    for (i = 1; i <= NF; i++) {
+        if ($i == "psk" || $i == "open") {
+            break;
+        }
+        # 拼接时避免多余空格
+        if (name == "") {
+            name = $i;
+        } else {
+            name = name " " $i;
+        }
+    }
+    # 去掉名称两端的多余空格（确保清理干净）
+    gsub(/^[ \t]+|[ \t]+$/, "", name);
+    print name;
+}')
+
+# 获取 Wi-Fi 列表并清理转义字符
+wifi_list=$(iwctl station wlan0 get-networks | sed '1,4d' | sed 's/\x1b\[[0-9;]*m//g' | while read -r line; do
+    # 提取 Wi-Fi 名称和加密类型
+    name=$(echo "$line" | awk '{for (i=1; i<=NF; i++) if ($i == "psk" || $i == "open") {for (j=1; j<i; j++) printf $j" "; print ""; exit}}' | xargs)
+    sec=$(echo "$line" | awk '{for (i=1; i<=NF; i++) if ($i == "psk" || $i == "open") {print $i; exit}}')
+
+    # 如果 Wi-Fi 名称在已保存列表中，添加 "::psk"
+    if echo "$saved_wifi_list" | grep -F -x -q "$name"; then
+        if [[ "$sec" == "psk" ]]; then
+            echo "$name::psk"
+        else
+            echo "$name"
+        fi
+    else
+        echo "$name"
+    fi
+done)
+
+# 显示菜单
+chosen_network=$(echo -e "$scan_option\n$toggle\n$wifi_list" | uniq -u | rofi -dmenu -i -selected-row 1 -p "Wi-Fi SSID: ")
+
+# 如果用户未选择任何选项（按下 ESC），直接退出
+if [ -z "$chosen_network" ]; then
+    exit
+fi
+
+# 如果用户选择了扫描网络
+if [ "$chosen_network" = "$scan_option" ]; then
+    notify-send "Scanning for available Wi-Fi networks..."
+    iwctl station wlan0 scan
+    exec "$0"  # 重新运行脚本以更新 Wi-Fi 列表
+elif [ "$chosen_network" = "󰖩  Enable Wi-Fi" ]; then
+    iwctl radio wifi enable
+    exit
+elif [ "$chosen_network" = "󰖪  Disable Wi-Fi" ]; then
+    iwctl radio wifi disable
+    exit
+fi
+
+# 提取 Wi-Fi 名称和安全类型
+chosen_id=$(echo "$chosen_network" | awk -F "::" '{print $1}' | xargs)
+security_type=$(echo "$chosen_network" | awk -F "::" '{print $2}')
+
+# 检查是否是当前已连接的 Wi-Fi
+if [[ "$chosen_id" == "> "* ]]; then
+    notify-send "Already Connected" "You are already connected to \"${chosen_id#> }\"."
+    exit
+fi
+
+# 检查 Wi-Fi 是否已保存
+is_known=$(iwctl known-networks list | grep -F -x "$chosen_id")
+
+if [ -n "$is_known" ]; then
+    # 如果 Wi-Fi 已保存，直接连接
+    iwctl station wlan0 connect "$chosen_id" && notify-send "Connection Established" "You are now connected to \"$chosen_id\"."
+else
+    # 如果 Wi-Fi 未保存，检查是否需要密码
+    if [ "$security_type" != "psk" ]; then
+        wifi_password=$(rofi -dmenu -p "Password: ")
+        iwctl station wlan0 connect "$chosen_id" -P "$wifi_password" && notify-send "Connection Established" "You are now connected to \"$chosen_id\"."
+    else
+        iwctl station wlan0 connect "$chosen_id" && notify-send "Connection Established" "You are now connected to \"$chosen_id\"."
+    fi
+fi
