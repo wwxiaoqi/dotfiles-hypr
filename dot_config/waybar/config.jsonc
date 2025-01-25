@@ -13,10 +13,10 @@
 		"custom/workspace-end",
         "custom/plaxeholder",
         "custom/plaxeholder",
-        "privacy"
+		"hyprland/window"
 	],
 	"modules-center": [
-		"hyprland/window"
+		"hyprland/submap"
 	],
 	"modules-right": [
 		"tray",
@@ -82,6 +82,7 @@
             "(.*) — Mozilla Firefox": "Firefox",
             "(.*) - Google Chrome": "Chrome",
 			"(.*) - Code - OSS": "VS Code",
+			"(.*) - Visual Studio Code": "Visual Studio Code",
 			"(.*) — 1Password": "1Password"
         },
         "separate-outputs": true
@@ -208,5 +209,10 @@
         "tooltip": true,
 		"return-type": "json",
         "interval": 1
-    }
+	},
+	"hyprland/submap": {
+		"format": "🔺",
+		"tooltip": false,
+		"transition-duration": 250
+	}
 }
