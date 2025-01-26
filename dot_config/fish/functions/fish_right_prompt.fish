@@ -4,7 +4,9 @@ function fish_right_prompt
     set -l normal_color (set_color normal)
     set -l branch_color (set_color yellow)
     set -l meta_color (set_color red)
+    set -l SHOW_GIT_PATH 0
 
+    # 检查是否是 Git 仓库
     if git_is_repo
         echo -n -s $branch_color (git_branch_name) $normal_color
         set -l git_meta ""
@@ -35,16 +37,30 @@ function fish_right_prompt
             echo -n -s " "
         end
 
-        set root_folder (command git rev-parse --show-toplevel 2> /dev/null)
-        set parent_root_folder (dirname $root_folder)
-        set cwd (echo $PWD | sed -e "s|$parent_root_folder/||")
+        # 判断是否显示路径
+        if set -q SHOW_GIT_PATH
+            if test $SHOW_GIT_PATH -eq 1
+                set root_folder (command git rev-parse --show-toplevel 2> /dev/null)
+                set parent_root_folder (dirname $root_folder)
+                set cwd (echo $PWD | sed -e "s|$parent_root_folder/||")
+            end
+        end
     else
-        set cwd (prompt_pwd)
+        # 如果不是 Git 仓库，直接显示当前路径
+        if set -q SHOW_GIT_PATH
+            if test $SHOW_GIT_PATH -eq 1
+                set cwd (prompt_pwd)
+            end
+        end
     end
 
-    echo -n -s $cwd_color "$cwd"
+    # 输出路径（如果启用了路径显示）
+    if test -n "$cwd"
+        echo -n -s $cwd_color "$cwd"
+    end
     set_color --dim
 
+    # 显示命令执行时间
     set -l S (math $CMD_DURATION/1000)
     set -l M (math $S/60)
 

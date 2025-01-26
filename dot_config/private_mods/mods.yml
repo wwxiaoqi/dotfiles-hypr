@@ -116,7 +116,11 @@ max-input-chars: 12250
 # max-tokens: 100
 
 # OpenAI 兼容 REST API 配置
+# 如需配置更多 API 请参考官方配置文件：https://github.com/charmbracelet/mods/blob/main/config_template.yml
 apis:
+
+  # DeepSeek
+  # https://api-docs.deepseek.com/zh-cn/
   deepseek:
     base-url: https://api.deepseek.com/
     api-key:
@@ -128,3 +132,53 @@ apis:
       deepseek-reasoner:
         aliases: ["r1"]
         max-input-chars: 384000
+
+  # OpenAI
+  # https://platform.openai.com/docs/models
+  openai:
+    base-url: https://api.openai.com/v1
+    api-key:
+    api-key-env: OPENAI_API_KEY
+    models:
+      gpt-4o-mini:
+        aliases: ["4o-mini"]
+        max-input-chars: 392000
+        fallback: gpt-4o
+      gpt-4o:
+        aliases: ["4o"]
+        max-input-chars: 392000
+        fallback: gpt-4
+      gpt-4:
+        aliases: ["4"]
+        max-input-chars: 24500
+        fallback: gpt-3.5-turbo
+      gpt-4-1106-preview:
+        aliases: ["128k"]
+        max-input-chars: 392000
+        fallback: gpt-4
+      gpt-4-32k:
+        aliases: ["32k"]
+        max-input-chars: 98000
+        fallback: gpt-4
+      gpt-3.5-turbo:
+        aliases: ["35t"]
+        max-input-chars: 12250
+        fallback: gpt-3.5
+      gpt-3.5-turbo-1106:
+        aliases: ["35t-1106"]
+        max-input-chars: 12250
+        fallback: gpt-3.5-turbo
+      gpt-3.5-turbo-16k:
+        aliases: ["35t16k"]
+        max-input-chars: 44500
+        fallback: gpt-3.5
+      gpt-3.5:
+        aliases: ["35"]
+        max-input-chars: 12250
+        fallback:
+      o1-preview:
+        aliases: ["o1-preview"]
+        max-input-chars: 128000
+      o1-mini:
+        aliases: ["o1-mini"]
+        max-input-chars: 128000
