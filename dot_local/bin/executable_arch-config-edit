@@ -18,5 +18,5 @@ selected_file=$(find "${search_paths[@]}" -type f | grep $exclusion_pattern | so
 
 # 检查 wmenu 是否选择了文件
 if [ -n "$selected_file" ]; then
-    foot nvim "$selected_file"
+    footclient nvim "$selected_file"
 fi

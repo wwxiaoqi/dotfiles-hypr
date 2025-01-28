@@ -68,7 +68,7 @@
 	"memory": {
 		"interval": 5,
 		"format": "MEM:{used:0.1f}G",
-		"on-click": "foot btop",
+		"on-click": "footclient btop",
 		"states": {
 			"warning": 70,
 			"critical": 90
@@ -83,6 +83,7 @@
             "(.*) - Google Chrome": "Chrome",
 			"(.*) - Code - OSS": "VS Code",
 			"(.*) - Visual Studio Code": "Visual Studio Code",
+            "(.*) - 思源笔记 v(.*)": "思源笔记",
 			"(.*) — 1Password": "1Password"
         },
         "separate-outputs": true
@@ -192,7 +193,7 @@
 		"tooltip": false
 	},
     "bluetooth": {
-		"on-click": "foot bluetuith",
+		"on-click": "footclient bluetuith",
 	    "format": "",
 	    "format-connected": "",
 	    "tooltip-format": "",
